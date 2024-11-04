@@ -40,6 +40,104 @@
         </div>
       </section>
 
+      <section class="row mb-4">
+        <div class="col-md-6">
+          <article class="card">
+            <div class="card-body">
+              <h2 class="card-title h4">Add Transaction</h2>
+              <form id="transaction-form">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Amount ($)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="amount"
+                    required
+                    step="0.01"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="type" class="form-label">Type</label>
+                  <select class="form-select" id="type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="date" required />
+                </div>
+                <div class="mb-3">
+                  <label for="notes" class="form-label">Notes</label>
+                  <textarea class="form-control" id="notes" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Add Transaction
+                </button>
+              </form>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-md-6">
+          <article class="card">
+            <div class="card-body">
+              <h2 class="card-title h4">Filter Transactions</h2>
+              <form id="filter-form">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="min-amount" class="form-label"
+                      >Min Amount</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="min-amount"
+                      step="0.01"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="max-amount" class="form-label"
+                      >Max Amount</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="max-amount"
+                      step="0.01"
+                    />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="filter-type" class="form-label">Type</label>
+                  <select class="form-select" id="filter-type">
+                    <option value="">All</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="filter-date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="filter-date" />
+                </div>
+                <div class="mb-3">
+                  <label for="filter-notes" class="form-label"
+                    >Notes (contains)</label
+                  >
+                  <input type="text" class="form-control" id="filter-notes" />
+                </div>
+                <button type="submit" class="btn btn-secondary">
+                  Apply Filters
+                </button>
+                <button type="reset" class="btn btn-outline-secondary">
+                  Clear Filters
+                </button>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+
       
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
