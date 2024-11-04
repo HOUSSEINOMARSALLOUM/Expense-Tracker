@@ -33,39 +33,37 @@ class TransactionManager {
       tableBody.innerHTML = filteredTransactions
         .map(
           (t) => `
-                  <tr>
-                      <td>${new Date(t.date).toLocaleDateString()}</td>
-                      <td>
-                          <span class="badge bg-${
-                            t.type === "income" ? "success" : "danger"
-                          } text-white">
-                              ${
-                                t.type.charAt(0).toUpperCase() + t.type.slice(1)
-                              }
-                          </span>
-                      </td>
-                      <td class="text-${
-                        t.type === "income" ? "success" : "danger"
-                      }">
-                          $${parseFloat(t.amount).toFixed(2)}
-                      </td>
-                      <td>${t.notes || "-"}</td>
-                      <td>
-                          <div class="btn-group btn-group-sm">
-                              <button class="btn btn-outline-primary edit-btn" data-id="${
-                                t.id
-                              }">
-                                  Edit
-                              </button>
-                              <button class="btn btn-outline-danger delete-btn" data-id="${
-                                t.id
-                              }">
-                                  Delete
-                              </button>
-                          </div>
-                      </td>
-                  </tr>
-              `
+                 <tr>
+                     <td>${new Date(t.date).toLocaleDateString()}</td>
+                     <td>
+                         <span class="badge bg-${
+                           t.type === "income" ? "success" : "danger"
+                         } text-white">
+                             ${t.type.charAt(0).toUpperCase() + t.type.slice(1)}
+                         </span>
+                     </td>
+                     <td class="text-${
+                       t.type === "income" ? "success" : "danger"
+                     }">
+                         $${parseFloat(t.amount).toFixed(2)}
+                     </td>
+                     <td>${t.notes || "-"}</td>
+                     <td>
+                         <div class="btn-group btn-group-sm">
+                             <button class="btn btn-outline-primary edit-btn" data-id="${
+                               t.id
+                             }">
+                                 Edit
+                             </button>
+                             <button class="btn btn-outline-danger delete-btn" data-id="${
+                               t.id
+                             }">
+                                 Delete
+                             </button>
+                         </div>
+                     </td>
+                 </tr>
+             `
         )
         .join("");
     }
@@ -124,3 +122,27 @@ class TransactionManager {
     this.updateUI();
   }
 }
+
+// Initialize TransactionManager
+const manager = new TransactionManager();
+
+// Form submission handler for new transactions
+document.getElementById("transaction-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const transaction = {
+    amount: document.getElementById("amount").value,
+    type: document.getElementById("type").value,
+    date: document.getElementById("date").value,
+    notes: document.getElementById("notes").value.trim(),
+  };
+  manager.addTransaction(transaction);
+  e.target.reset();
+});
+
+// Filter form handlers remain the same
+
+// Initial UI update
+manager.updateUI();
+
+// Add default date to the date input
+document.getElementById("date").valueAsDate = new Date();
