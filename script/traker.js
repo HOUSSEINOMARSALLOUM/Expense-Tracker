@@ -173,7 +173,7 @@ class TransactionManager {
   handleDelete(e) {
     if (confirm("Are you sure you want to delete this transaction?")) {
       const id = e.target.dataset.id;
-      this.deleteTransaction(id);
+      this.deleteTransaction(id); 
     }
   }
 
