@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expense Tracker</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+  </body>
+</html>
+script>
+  // Add event listener to the document to ensure the DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Init<ialize the expense tracker
+    const expenseTracker = {
+      // Initialize an empty array to store expenses
+      expenses: [],
+
+      // Function to add a new expense
+      addExpense: function(expense) {
+        this.expenses.push(expense);
+      },
+
+      // Function to remove an expense
+      removeExpense: function(index) {
+        this.expenses.splice(index, 1);
+      },
+
+      // Function to calculate the total expenses
+      calculateTotal: function() {
+        return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+      }
+    };
+
+    // Example usage
+    expenseTracker.addExpense({ name: 'Rent', amount: 1000 });
+    expenseTracker.addExpense({ name: 'Groceries', amount: 500 });
+
+    // Log the total expenses
+    console.log(expenseTracker.calculateTotal());
+  });
+</script>
