@@ -16,4 +16,58 @@ class TransactionManager {
     this.updateUI();
   }
 
-  
+  // Previous methods remain the same
+
+  updateUI() {
+    const filteredTransactions = this.getFilteredTransactions();
+    console.log("Filtered transactions:", filteredTransactions); // Debug log
+
+    const tableBody = document.getElementById("transactions-table");
+    const noTransactionsDiv = document.getElementById("no-transactions");
+
+    if (filteredTransactions.length === 0) {
+      tableBody.innerHTML = "";
+      noTransactionsDiv.classList.remove("d-none");
+    } else {
+      noTransactionsDiv.classList.add("d-none");
+      tableBody.innerHTML = filteredTransactions
+        .map(
+          (t) => `
+                  <tr>
+                      <td>${new Date(t.date).toLocaleDateString()}</td>
+                      <td>
+                          <span class="badge bg-${
+                            t.type === "income" ? "success" : "danger"
+                          } text-white">
+                              ${
+                                t.type.charAt(0).toUpperCase() + t.type.slice(1)
+                              }
+                          </span>
+                      </td>
+                      <td class="text-${
+                        t.type === "income" ? "success" : "danger"
+                      }">
+                          $${parseFloat(t.amount).toFixed(2)}
+                      </td>
+                      <td>${t.notes || "-"}</td>
+                      <td>
+                          <div class="btn-group btn-group-sm">
+                              <button class="btn btn-outline-primary edit-btn" data-id="${
+                                t.id
+                              }">
+                                  Edit
+                              </button>
+                              <button class="btn btn-outline-danger delete-btn" data-id="${
+                                t.id
+                              }">
+                                  Delete
+                              </button>
+                          </div>
+                      </td>
+                  </tr>
+              `
+        )
+        .join("");
+    }
+
+    
