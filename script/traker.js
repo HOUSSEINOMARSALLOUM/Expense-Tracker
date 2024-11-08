@@ -34,3 +34,52 @@ async function register(username, email, password) {
     alert(error.response?.data?.error || "Registration failed");
   }
 }
+
+// Transaction functions
+async function loadTransactions() {
+  try {
+    const response = await axios.get(`${API_URL}/transactions`, {
+      params: { user_id: currentUser.id },
+    });
+    updateTransactionsTable(response.data);
+    updateTotals(response.data);
+  } catch (error) {
+    alert("Failed to load transactions");
+  }
+}
+
+async function addTransaction(transactionData) {
+  try {
+    await axios.post(`${API_URL}/transactions`, {
+      ...transactionData,
+      user_id: currentUser.id,
+    });
+    loadTransactions();
+  } catch (error) {
+    alert("Failed to add transaction");
+  }
+}
+
+async function updateTransaction(id, transactionData) {
+  try {
+    await axios.put(`${API_URL}/transactions`, {
+      ...transactionData,
+      id,
+      user_id: currentUser.id,
+    });
+    loadTransactions();
+  } catch (error) {
+    alert("Failed to update transaction");
+  }
+}
+
+async function deleteTransaction(id) {
+  try {
+    await axios.delete(`${API_URL}/transactions`, {
+      params: { id, user_id: currentUser.id },
+    });
+    loadTransactions();
+  } catch (error) {
+    alert("Failed to delete transaction");
+  }
+}
