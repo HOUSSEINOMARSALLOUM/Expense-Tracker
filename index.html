@@ -15,223 +15,325 @@
         <h1 class="text-center">Expense Tracker</h1>
       </div>
     </header>
-
-    <main class="container">
-      <section class="row mb-4">
-        <div class="col-md-6 mx-auto">
+    <!-- Login/Register Section -->
+    <div id="auth-section" class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
           <div class="card">
             <div class="card-body">
-              <h2 class="card-title h4">Total Budget</h2>
-              <div class="d-flex justify-content-between align-items-center">
-                <p class="h3 mb-0">
-                  Balance: $<span id="total-balance">0</span>
-                </p>
-                <div>
-                  <p class="text-success mb-0">
-                    Income: $<span id="total-income">0</span>
-                  </p>
-                  <p class="text-danger mb-0">
-                    Expenses: $<span id="total-expenses">0</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="row mb-4">
-        <div class="col-md-6">
-          <article class="card">
-            <div class="card-body">
-              <h2 class="card-title h4">Add Transaction</h2>
-              <form id="transaction-form">
-                <div class="mb-3">
-                  <label for="amount" class="form-label">Amount ($)</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="amount"
-                    required
-                    step="0.01"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="type" class="form-label">Type</label>
-                  <select class="form-select" id="type" required>
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="date" class="form-label">Date</label>
-                  <input type="date" class="form-control" id="date" required />
-                </div>
-                <div class="mb-3">
-                  <label for="notes" class="form-label">Notes</label>
-                  <textarea class="form-control" id="notes" rows="2"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                  Add Transaction
-                </button>
-              </form>
-            </div>
-          </article>
-        </div>
-
-        <div class="col-md-6">
-          <article class="card">
-            <div class="card-body">
-              <h2 class="card-title h4">Filter Transactions</h2>
-              <form id="filter-form">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="min-amount" class="form-label"
-                      >Min Amount</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="min-amount"
-                      step="0.01"
-                    />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="max-amount" class="form-label"
-                      >Max Amount</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="max-amount"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="filter-type" class="form-label">Type</label>
-                  <select class="form-select" id="filter-type">
-                    <option value="">All</option>
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="filter-date" class="form-label">Date</label>
-                  <input type="date" class="form-control" id="filter-date" />
-                </div>
-                <div class="mb-3">
-                  <label for="filter-notes" class="form-label"
-                    >Notes (contains)</label
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#login"
+                    >Login</a
                   >
-                  <input type="text" class="form-control" id="filter-notes" />
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#register"
+                    >Register</a
+                  >
+                </li>
+              </ul>
+              <div class="tab-content mt-3">
+                <div id="login" class="tab-pane active">
+                  <form id="login-form">
+                    <div class="mb-3">
+                      <label class="form-label">Username</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </form>
                 </div>
-                <button type="submit" class="btn btn-secondary">
-                  Apply Filters
-                </button>
-                <button type="reset" class="btn btn-outline-secondary">
-                  Clear Filters
-                </button>
-              </form>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row">
-        <div class="col-12">
-          <article class="card">
-            <div class="card-body">
-              <h2 class="card-title h4">Transactions</h2>
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Type</th>
-                      <th>Amount</th>
-                      <th>Notes</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="transactions-table">
-                    <!-- Transactions will be inserted here -->
-                  </tbody>
-                </table>
+                <div id="register" class="tab-pane fade">
+                  <form id="register-form">
+                    <div class="mb-3">
+                      <label class="form-label">Username</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Register
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <!-- Edit Transaction Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Transaction</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="edit-form">
-              <input type="hidden" id="edit-id" />
-              <div class="mb-3">
-                <label for="edit-amount" class="form-label">Amount ($)</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="edit-amount"
-                  required
-                  step="0.01"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="edit-type" class="form-label">Type</label>
-                <select class="form-select" id="edit-type" required>
-                  <option value="income">Income</option>
-                  <option value="expense">Expense</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="edit-date" class="form-label">Date</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="edit-date"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="edit-notes" class="form-label">Notes</label>
-                <textarea
-                  class="form-control"
-                  id="edit-notes"
-                  rows="2"
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button type="button" class="btn btn-primary" id="save-edit">
-              Save Changes
-            </button>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Main App Section (initially hidden) -->
+    <div id="app-section" class="d-none">
+      <!-- Header Section -->
+      <header class="bg-primary text-white py-3 mb-4">
+        <div class="container">
+          <h1 class="text-center">Expense Tracker</h1>
+        </div>
+      </header>
+
+      <main class="container">
+        <section class="row mb-4">
+          <div class="col-md-6 mx-auto">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title h4">Total Budget</h2>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="h3 mb-0">
+                    Balance: $<span id="total-balance">0</span>
+                  </p>
+                  <div>
+                    <p class="text-success mb-0">
+                      Income: $<span id="total-income">0</span>
+                    </p>
+                    <p class="text-danger mb-0">
+                      Expenses: $<span id="total-expenses">0</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="row mb-4">
+          <div class="col-md-6">
+            <article class="card">
+              <div class="card-body">
+                <h2 class="card-title h4">Add Transaction</h2>
+                <form id="transaction-form">
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Amount ($)</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="amount"
+                      required
+                      step="0.01"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="type" class="form-label">Type</label>
+                    <select class="form-select" id="type" required>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="date"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="notes" class="form-label">Notes</label>
+                    <textarea
+                      class="form-control"
+                      id="notes"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Add Transaction
+                  </button>
+                </form>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6">
+            <article class="card">
+              <div class="card-body">
+                <h2 class="card-title h4">Filter Transactions</h2>
+                <form id="filter-form">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="min-amount" class="form-label"
+                        >Min Amount</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="min-amount"
+                        step="0.01"
+                      />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="max-amount" class="form-label"
+                        >Max Amount</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="max-amount"
+                        step="0.01"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="filter-type" class="form-label">Type</label>
+                    <select class="form-select" id="filter-type">
+                      <option value="">All</option>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="filter-date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="filter-date" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="filter-notes" class="form-label"
+                      >Notes (contains)</label
+                    >
+                    <input type="text" class="form-control" id="filter-notes" />
+                  </div>
+                  <button type="submit" class="btn btn-secondary">
+                    Apply Filters
+                  </button>
+                  <button type="reset" class="btn btn-outline-secondary">
+                    Clear Filters
+                  </button>
+                </form>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="row">
+          <div class="col-12">
+            <article class="card">
+              <div class="card-body">
+                <h2 class="card-title h4">Transactions</h2>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transactions-table">
+                      <!-- Transactions will be inserted here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <!-- Edit Transaction Modal -->
+      <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Transaction</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="edit-form">
+                <input type="hidden" id="edit-id" />
+                <div class="mb-3">
+                  <label for="edit-amount" class="form-label">Amount ($)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="edit-amount"
+                    required
+                    step="0.01"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="edit-type" class="form-label">Type</label>
+                  <select class="form-select" id="edit-type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="edit-date" class="form-label">Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="edit-date"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="edit-notes" class="form-label">Notes</label>
+                  <textarea
+                    class="form-control"
+                    id="edit-notes"
+                    rows="2"
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-primary" id="save-edit">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
       src = "./script/traker.js";
