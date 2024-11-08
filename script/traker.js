@@ -137,3 +137,30 @@ function updateTotals(transactions) {
   document.getElementById("total-balance").textContent =
     totalBalance.toFixed(2);
 }
+
+// Event Listeners
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  await login(formData.get("username"), formData.get("password"));
+});
+
+document
+  .getElementById("register-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    await register(
+      formData.get("username"),
+      formData.get("email"),
+      formData.get("password")
+    );
+  });
+
+// Check for existing session
+const savedUser = localStorage.getItem("user");
+if (savedUser) {
+  currentUser = JSON.parse(savedUser);
+  showApp();
+  loadTransactions();
+}
